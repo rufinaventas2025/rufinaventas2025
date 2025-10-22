@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar / Eliminar Artículo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #fdf6f0; }
+        h1 { color: gold; text-align: center; }
+        .articulo { border: 1px solid #ccc; border-radius: 10px; padding: 10px; margin: 10px auto; width: 300px; background-color: #fff; text-align: center; }
+        .boton-eliminar { background-color: red; color: #fff; padding: 5px; border: none; border-radius: 5px; cursor: pointer; }
+        .boton-eliminar:hover { background-color: darkred; }
+        .imagenes { display: flex; flex-wrap: wrap; justify-content: center; }
+        .imagenes img { width: 100px; height: 100px; object-fit: cover; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Agregar / Eliminar Artículo</h1>
+
+    <h2>Eliminar Artículo</h2>
+    {% for articulo in articulos %}
+    <div class="articulo">
+        <h3>{{ articulo.nombre }}</h3>
+        <div class="imagenes">
+            {% for imagen in articulo.imagenes %}
+            <img src="{{ url_for('static', filename='images/' + imagen) }}" alt="{{ articulo.nombre }}">
+            {% endfor %}
+        </div>
+        <form method="POST" onsubmit="return confirm('¿Seguro que querés eliminar este artículo?');">
+            <input type="hidden" name="eliminar" value="{{ articulo.nombre }}">
+            <button class="boton-eliminar">Eliminar</button>
+        </form>
+    </div>
+    {% endfor %}
+
+    <h2>Agregar Artículo</h2>
+    <a href="{{ url_for('agregar') }}">Ir a agregar artículo</a>
+</body>
+</html>

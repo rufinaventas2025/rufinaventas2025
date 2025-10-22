@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar / Eliminar Artículo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff8f0;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: goldenrod;
+        }
+        .form-container, .articulos-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, button {
+            padding: 8px;
+            margin-top: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .articulo {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        .articulo img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-right: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .articulo-info {
+            flex: 1;
+        }
+        .delete-button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .delete-button:hover {
+            background-color: #e60000;
+        }
+        .flash {
+            color: green;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Agregar / Eliminar Artículo</h1>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">
+          {% for message in messages %}
+            {{ message }}<br>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <div class="form-container">
+        <h2>Agregar Nuevo Artículo</h2>
+        <form action="" method="post" enctype="multipart/form-data">
+            <label for="nombre">Nombre del Artículo:</label>
+            <input type="text" name="nombre" id="nombre" required>
+
+            <label for="precio">Precio:</label>
+            <input type="number" name="precio" id="precio" step="0.01" required>
+
+            <label for="stock">Stock:</label>
+            <input type="number" name="stock" id="stock" required>
+
+            <label for="imagenes">Imágenes (puede subir varias):</label>
+            <input type="file" name="imagenes" id="imagenes" multiple required>
+
+            <button type="submit">Agregar Artículo</button>
+        </form>
+    </div>
+
+    <div class="articulos-container">
+        <h2>Artículos Existentes</h2>
+        {% for art in articulos %}
+            <div class="articulo">
+                <div>
+                    {% for img in art.imagenes %}
+                        <img src="{{ url_for('static', filename='images/' + img) }}" alt="{{ art.nombre }}">
+                    {% endfor %}
+                </div>
+                <div class="articulo-info">
+                    <strong>{{ art.nombre }}</strong><br>
+                    Precio: ${{ art.precio }}<br>
+                    Stock: {{ art.stock }}
+                </div>
+                <form action="{{ url_for('eliminar_articulo', nombre_articulo=art.nombre) }}?clave=Amin@2025" method="post">
+                    <button type="submit" class="delete-button">Eliminar</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

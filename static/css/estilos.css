@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f7f7f7;
+}
+
+header {
+    text-align: center;
+    padding: 20px 0;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.titulo-dorado {
+    color: goldenrod;
+    text-align: center;
+    font-size: 2em;
+    margin: 0;
+}
+
+.btn-admin {
+    position: absolute;
+    right: 20px;
+    top: 25px;
+    background: goldenrod;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.productos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.producto-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.producto-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.carrusel {
+    display: flex;
+    overflow-x: auto;
+    gap: 5px;
+    scrollbar-width: thin;
+}
+
+.carrusel img {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+}
+
+.btn-comprar {
+    display: inline-block;
+    background: goldenrod;
+    color: #fff;
+    padding: 8px 12px;
+    margin-top: 5px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.sin-stock {
+    color: red;
+    font-weight: bold;
+}
+
+footer {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    text-align: right;
+    font-size: 0.9em;
+}
+
+.footer-titulo {
+    color: goldenrod;
+    font-weight: bold;
+}
+
+.footer-nombre {
+    color: brown;
+}

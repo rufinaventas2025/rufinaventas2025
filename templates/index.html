@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Rufina Costura Creativa</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #fdf6e3; }
+        h1 { text-align: center; color: gold; }
+        .articulos { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+        .articulo { border: 1px solid #ccc; padding: 10px; width: 220px; text-align: center; background: #fff; }
+        .articulo h3 { color: purple; }
+        .carousel { position: relative; width: 200px; height: 200px; overflow: hidden; margin: 0 auto; }
+        .carousel img { position: absolute; width: 200px; height: 200px; object-fit: cover; top: 0; left: 0; transition: opacity 0.5s; cursor: pointer; }
+        .carousel img.inactive { opacity: 0; }
+        .footer { position: fixed; bottom: 10px; right: 10px; color: brown; text-align: right; }
+        .boton-comprar { margin-top: 10px; display: inline-block; padding: 5px 10px; background: gold; color: #000; text-decoration: none; border-radius: 5px; }
+        .boton-admin { position: fixed; top: 10px; right: 10px; padding: 5px 10px; background: brown; color: #fff; text-decoration: none; border-radius: 5px; }
+
+        /* Modal */
+        .modal { display: none; position: fixed; z-index: 1000; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.9); }
+        .modal img { display: block; max-width: 90%; max-height: 80%; margin: 60px auto; border-radius: 10px; }
+        .modal .cerrar, .modal .prev, .modal .next { position: absolute; color: white; font-size: 40px; font-weight: bold; cursor: pointer; user-select: none; }
+        .modal .cerrar { top: 20px; right: 35px; }
+        .modal .prev { top: 50%; left: 10px; transform: translateY(-50%); }
+        .modal .next { top: 50%; right: 10px; transform: translateY(-50%); }
+        #caption { text-align: center; color: white; padding: 10px 0; font-size: 18px; }
+    </style>
+</head>
+<body>
+<h1>Rufina Costura Creativa</h1>
+<a href="/clave" class="boton-admin">Agregar/Eliminar Artículo</a>
+
+<div class="articulos">
+    {% for articulo in articulos %}
+        <div class="articulo" data-articulo="{{ loop.index0 }}">
+            <h3>{{ articulo.nombre }}</h3>
+            <div class="carousel">
+                {% for img in articulo.imagenes %}
+                    <img src="{{ url_for('static', filename='images/' + img) }}" alt="{{ articulo.nombre }}" class="{% if not loop.first %}inactive{% endif %}" data-index="{{ loop.index0 }}">
+                {% endfor %}
+            </div>
+            <p>Precio: ${{ articulo.precio }}</p>
+            <p>Stock: {% if articulo.stock == 0 %}Sin Stock{% else %}{{ articulo.stock }}{% endif %}</p>
+            {% if articulo.stock > 0 %}
+                <a href="{{ url_for('comprar', nombre_articulo=articulo.nombre) }}" class="boton-comprar">Comprar</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+
+<div class="footer">
+    Rufina Costura Creativa<br>
+    Laura Rodríguez - cel. 094.363.375
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+    <span class="cerrar">&times;</span>
+    <span class="prev">&#10094;</span>
+    <span class="next">&#10095;</span>
+    <img id="modal-img">
+    <div id="caption"></div>
+</div>
+
+<script>
+    // Carrusel automático
+    document.querySelectorAll('.carousel').forEach(carousel => {
+        const imgs = carousel.querySelectorAll('img');
+        let index = 0;
+        setInterval(() => {
+            imgs[index].classList.add('inactive');
+            index = (index + 1) % imgs.length;
+            imgs[index].classList.remove('inactive');
+        }, 2000);
+    });
+
+    // Modal con navegación
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const caption = document.getElementById('caption');
+    let currentIndex = 0;
+    let articuloImgs = [];
+
+    document.querySelectorAll('.articulo').forEach(art => {
+        art.querySelectorAll('img').forEach(img => {
+            img.onclick = function() {
+                articuloImgs = Array.from(art.querySelectorAll('img'));
+                currentIndex = parseInt(this.dataset.index);
+                showModal();
+            }
+        });
+    });
+
+    function showModal() {
+        modal.style.display = 'block';
+        modalImg.src = articuloImgs[currentIndex].src;
+        caption.textContent = articuloImgs[currentIndex].alt;
+    }
+
+    document.querySelector('.cerrar').onclick = () => modal.style.display = 'none';
+    document.querySelector('.prev').onclick = () => {
+        currentIndex = (currentIndex - 1 + articuloImgs.length) % articuloImgs.length;
+        showModal();
+    }
+    document.querySelector('.next').onclick = () => {
+        currentIndex = (currentIndex + 1) % articuloImgs.length;
+        showModal();
+    }
+    modal.onclick = function(event) {
+        if(event.target == modal) modal.style.display = 'none';
+    }
+</script>
+</body>
+</html>

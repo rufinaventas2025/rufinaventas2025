@@ -1,0 +1,14 @@
+[
+    {
+        "nombre": "Bolso artesanal",
+        "precio": 1200,
+        "stock": 5,
+        "imagenes": ["bolso1.jpg", "bolso2.jpg"]
+    },
+    {
+        "nombre": "Monedero colorido",
+        "precio": 450,
+        "stock": 10,
+        "imagenes": ["monedero1.jpg"]
+    }
+]
