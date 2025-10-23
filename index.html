@@ -3,291 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Rufina Costura Creativa</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #fdf6e3;
-            margin: 0;
-            padding-bottom: 200px;
-        }
-
-        /* --- Título con imagen --- */
-        header {
-            text-align: center;
-            padding: 20px;
-        }
-        header img {
-            display: block;
-            margin: 0 auto;
-            height: 220px;
-            max-width: 90%;
-            object-fit: contain;
-            opacity: 0;
-            animation: fadeIn 1.5s forwards;
-        }
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
-        h1 { text-align: center; color: gold; }
-        .articulos {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-        .articulo {
-            border: 1px solid #ccc;
-            padding: 10px;
-            width: 220px;
-            text-align: center;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .articulo h3 { color: purple; }
-
-        .carousel {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-        .carousel img {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            top: 0; left: 0;
-            transition: opacity 0.5s;
-            cursor: pointer;
-        }
-        .carousel img.inactive { opacity: 0; }
-
-        /* Footer fijo abajo a la derecha */
-        .footer {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            color: brown;
-            text-align: right;
-            background: rgba(255,255,255,0.7);
-            padding: 5px 10px;
-            border-radius: 8px;
-            z-index: 4000;
-        }
-
-        .boton-comprar {
-            margin-top: 10px;
-            display: inline-block;
-            padding: 5px 10px;
-            background: gold;
-            color: #000;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .boton-admin {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            padding: 5px 10px;
-            background: brown;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            z-index: 3000;
-        }
-
-        /* --- Modal de imágenes --- */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left:0; top:0;
-            width:100%; height:100%;
-            background: rgba(0,0,0,0.9);
-        }
-        .modal img {
-            display: block;
-            max-width: 90%;
-            max-height: 80%;
-            margin: 60px auto;
-            border-radius: 10px;
-        }
-        .modal .cerrar, .modal .prev, .modal .next {
-            position: absolute;
-            color: white;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            user-select: none;
-        }
-        .modal .cerrar { top: 20px; right: 35px; }
-        .modal .prev { top: 50%; left: 10px; transform: translateY(-50%); }
-        .modal .next { top: 50%; right: 10px; transform: translateY(-50%); }
-        #caption { text-align: center; color: white; padding: 10px 0; font-size: 18px; }
-
-        /* --- Carrito --- */
-        #carrito {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: #fff8dc;
-            border: 2px solid gold;
-            border-radius: 10px;
-            padding: 15px;
-            width: 250px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-            z-index: 2000;
-        }
-        #carrito h3 {
-            text-align: center;
-            color: brown;
-        }
-        #carrito ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        #carrito li {
-            border-bottom: 1px solid #ccc;
-            padding: 4px 0;
-            font-size: 14px;
-        }
-        #carrito p {
-            text-align: center;
-            font-weight: bold;
-        }
-        .btn-vaciar {
-            display: block;
-            margin: 5px auto;
-            background: #e0b000;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-        .btn-finalizar {
-            display: block;
-            margin: 10px auto;
-            background: brown;
-            color: white;
-            border: 2px solid gold;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        /* --- Formulario modal del carrito --- */
-        #form-compra {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 3000;
-        }
-        #form-compra form {
-            background: #fff8dc;
-            border: 2px solid gold;
-            border-radius: 10px;
-            width: 300px;
-            margin: 100px auto;
-            padding: 20px;
-        }
-        #form-compra h3 {
-            text-align: center;
-            color: brown;
-        }
-        #form-compra input {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-        }
-        #form-compra button {
-            background: brown;
-            color: white;
-            border: 2px solid gold;
-            padding: 8px 12px;
-            border-radius: 8px;
-            width: 100%;
-            cursor: pointer;
-        }
-
-        /* --- Información envíos y pagos --- */
-        .info-envios {
-            text-align: left;
-            max-width: 800px;
-            margin: 40px auto 100px auto;
-            background: #fff8dc;
-            padding: 20px;
-            border: 2px solid gold;
-            border-radius: 10px;
-            box-shadow:0 0 10px rgba(0,0,0,0.1);
-            line-height: 1.5;
-        }
-        .info-envios h3 {
-            color: brown;
-            text-align: center;
-            margin-top: 10px;
-        }
-        .info-envios p {
-            margin-bottom: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="estilos.css">
 </head>
-
 <body>
     <!-- Imagen del título -->
     <header>
-        <img src="{{ url_for('static', filename='img/titulo.png') }}" alt="Rufina Costuras Creativas">
+        <img src="static/img/titulo.png" alt="Rufina Costuras Creativas">
     </header>
 
-    <a href="/clave" class="boton-admin">Agregar/Eliminar Artículo</a>
+    <!-- Botón Admin (solo enlace, no funcional) -->
+    <a href="#" class="boton-admin">Agregar/Eliminar Artículo</a>
 
     <!-- Carrito -->
     <div id="carrito">
         <h3>🛍️ Carrito</h3>
-        {% if carrito %}
-            <ul>
-                {% for item in carrito %}
-                    <li>{{ item.nombre }} x{{ item.cantidad }}</li>
-                {% endfor %}
-            </ul>
-            <p>Total: ${{ total }}</p>
-            <a href="{{ url_for('vaciar') }}" class="btn-vaciar">Vaciar</a>
-            <button class="btn-finalizar" onclick="abrirFormulario()">Finalizar compra</button>
-        {% else %}
-            <p>Vacío</p>
-        {% endif %}
+        <ul id="lista-carrito"></ul>
+        <p>Total: $<span id="total">0</span></p>
+        <button class="btn-vaciar" onclick="vaciarCarrito()">Vaciar</button>
     </div>
 
     <!-- Lista de artículos -->
     <div class="articulos">
-        {% for articulo in articulos %}
-            <div class="articulo" data-articulo="{{ loop.index0 }}">
-                <h3>{{ articulo.nombre }}</h3>
-                <div class="carousel">
-                    {% for img in articulo.imagenes %}
-                        <img src="{{ url_for('static', filename='images/' + img) }}" alt="{{ articulo.nombre }}" class="{% if not loop.first %}inactive{% endif %}" data-index="{{ loop.index0 }}">
-                    {% endfor %}
-                </div>
-                <p>Precio: ${{ articulo.precio }}</p>
-                <p>Stock: {% if articulo.stock == 0 %}Sin Stock{% else %}{{ articulo.stock }}{% endif %}</p>
-                {% if articulo.stock > 0 %}
-                    <a href="{{ url_for('agregar', nombre=articulo.nombre) }}" class="boton-comprar">Agregar al carrito</a>
-                {% endif %}
+
+        <!-- Producto 1 -->
+        <div class="articulo">
+            <h3>Producto 1</h3>
+            <div class="carousel">
+                <img src="static/images/producto1_1.jpg" class="">
+                <img src="static/images/producto1_2.jpg" class="inactive">
             </div>
-        {% endfor %}
+            <p>Precio: $1000</p>
+            <p>Stock: 5</p>
+            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Producto 1',1000)">Agregar al carrito</a>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="articulo">
+            <h3>Producto 2</h3>
+            <div class="carousel">
+                <img src="static/images/producto2_1.jpg" class="">
+                <img src="static/images/producto2_2.jpg" class="inactive">
+            </div>
+            <p>Precio: $1500</p>
+            <p>Stock: 3</p>
+            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Producto 2',1500)">Agregar al carrito</a>
+        </div>
+
+        <!-- Agregá más productos aquí de la misma forma -->
+
     </div>
 
     <!-- Información envíos y pagos -->
@@ -300,22 +63,9 @@
         <h3>COMO PAGAR</h3>
         <p>Podes pagar tus compras en depósito o transferencia a Brou o tarjeta PREX.</p>
         <p>Mercado pago hasta en 12 cuotas con un adicional del 10% por comisión (pedir link de pago).</p>
-        <p>Una vez realizada la compra y efectuado el pago enviar comprobante al 094 363 375.</p>
 
         <h3>ELECCIÓN DE PRODUCTOS EN TELAS QUE NO ESTÉN EN STOCK</h3>
         <p>Solicita catálogo de telas al cel.: 094 363 375.</p>
-    </div>
-
-    <!-- Formulario de compra -->
-    <div id="form-compra">
-        <form method="POST" action="{{ url_for('finalizar') }}">
-            <h3>Finalizar compra</h3>
-            <input type="text" name="nombre" placeholder="Tu nombre" required>
-            <input type="email" name="correo" placeholder="Tu correo" required>
-            <input type="text" name="telefono" placeholder="Tu teléfono" required>
-            <button type="submit">Enviar pedido</button>
-            <button type="button" style="margin-top:10px;background:#ccc;color:#000;border:none;" onclick="cerrarFormulario()">Cancelar</button>
-        </form>
     </div>
 
     <!-- Footer fijo abajo a la derecha -->
@@ -333,7 +83,32 @@
         <div id="caption"></div>
     </div>
 
+    <!-- Scripts -->
     <script>
+        // Carrito
+        let carrito = [];
+        function agregarAlCarrito(nombre, precio) {
+            carrito.push({nombre, precio});
+            actualizarCarrito();
+        }
+        function actualizarCarrito() {
+            const lista = document.getElementById('lista-carrito');
+            const total = document.getElementById('total');
+            lista.innerHTML = '';
+            let suma = 0;
+            carrito.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.nombre + ' $' + item.precio;
+                lista.appendChild(li);
+                suma += item.precio;
+            });
+            total.textContent = suma;
+        }
+        function vaciarCarrito() {
+            carrito = [];
+            actualizarCarrito();
+        }
+
         // Carrusel automático
         document.querySelectorAll('.carousel').forEach(carousel => {
             const imgs = carousel.querySelectorAll('img');
@@ -356,7 +131,7 @@
             art.querySelectorAll('img').forEach(img => {
                 img.onclick = function() {
                     articuloImgs = Array.from(art.querySelectorAll('img'));
-                    currentIndex = parseInt(this.dataset.index);
+                    currentIndex = Array.from(articuloImgs).indexOf(this);
                     showModal();
                 }
             });
@@ -379,14 +154,6 @@
         }
         modal.onclick = function(event) {
             if(event.target == modal) modal.style.display = 'none';
-        }
-
-        // Formulario compra
-        function abrirFormulario() {
-            document.getElementById('form-compra').style.display = 'block';
-        }
-        function cerrarFormulario() {
-            document.getElementById('form-compra').style.display = 'none';
         }
     </script>
 </body>
