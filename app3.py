@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_mail import Mail, Message
 import json
 import os
@@ -45,19 +45,124 @@ def guardar_articulos(articulos):
 @app.route("/")
 def index():
     articulos = leer_articulos()
-    return render_template("index.html", articulos=articulos)
+    carrito = session.get("carrito", [])
+    total = sum(item["precio"] * item["cantidad"] for item in carrito)
+    return render_template("index.html", articulos=articulos, carrito=carrito, total=total)
 
-# Pantalla de contraseña
+# Agregar al carrito (verifica stock)
+@app.route("/agregar/<nombre>")
+def agregar(nombre):
+    articulos = leer_articulos()
+    articulo = next((a for a in articulos if a["nombre"] == nombre), None)
+    if not articulo:
+        flash("Artículo no encontrado")
+        return redirect(url_for("index"))
+
+    carrito = session.get("carrito", [])
+    existente = next((i for i in carrito if i["nombre"] == nombre), None)
+    cantidad_en_carrito = existente["cantidad"] if existente else 0
+
+    if articulo.get("stock", 0) <= cantidad_en_carrito:
+        flash(f"No hay más stock disponible de '{nombre}'. Disponible: {articulo.get('stock',0)}")
+        return redirect(url_for("index"))
+
+    if existente:
+        existente["cantidad"] += 1
+    else:
+        carrito.append({
+            "nombre": articulo["nombre"],
+            "precio": articulo["precio"],
+            "cantidad": 1
+        })
+
+    session["carrito"] = carrito
+    flash(f"{nombre} agregado al carrito.")
+    return redirect(url_for("index"))
+
+# Vaciar carrito
+@app.route("/vaciar")
+def vaciar():
+    session.pop("carrito", None)
+    flash("Carrito vaciado.")
+    return redirect(url_for("index"))
+
+# Finalizar compra (verifica stock y descuenta)
+@app.route("/finalizar", methods=["POST"])
+def finalizar():
+    nombre = request.form.get("nombre")
+    correo = request.form.get("correo")
+    telefono = request.form.get("telefono")
+    carrito = session.get("carrito", [])
+
+    if not carrito:
+        flash("El carrito está vacío.")
+        return redirect(url_for("index"))
+
+    if not nombre or not correo or not telefono:
+        flash("Por favor, complete todos los campos.")
+        return redirect(url_for("index"))
+
+    articulos = leer_articulos()
+    faltantes = []
+
+    for item in carrito:
+        art = next((a for a in articulos if a["nombre"] == item["nombre"]), None)
+        if not art:
+            faltantes.append(f"{item['nombre']} (no existe)")
+            continue
+        if art["stock"] < item["cantidad"]:
+            faltantes.append(f"{item['nombre']} (disponible: {art['stock']}, pedido: {item['cantidad']})")
+
+    if faltantes:
+        flash("No se puede completar la compra. Problemas con stock: " + "; ".join(faltantes))
+        return redirect(url_for("index"))
+
+    # Descontar stock
+    for item in carrito:
+        art = next((a for a in articulos if a["nombre"] == item["nombre"]), None)
+        if art:
+            art["stock"] -= item["cantidad"]
+            if art["stock"] < 0:
+                art["stock"] = 0
+    guardar_articulos(articulos)
+
+    # Enviar correo
+    total = sum(item["precio"] * item["cantidad"] for item in carrito)
+    productos = "\n".join([f"{i['nombre']} x{i['cantidad']} = ${i['precio']*i['cantidad']}" for i in carrito])
+    try:
+        msg = Message(
+            subject=f"Pedido de {nombre}",
+            recipients=["rufina.ventas2025@gmail.com"]
+        )
+        msg.body = f"""
+Nueva compra desde la tienda:
+
+Nombre: {nombre}
+Correo: {correo}
+Teléfono: {telefono}
+
+Productos:
+{productos}
+
+Total: ${total:.2f}
+"""
+        mail.send(msg)
+        flash("Compra finalizada. Te contactaremos pronto 💌")
+    except Exception as e:
+        flash(f"No se pudo enviar el correo: {str(e)}")
+
+    session.pop("carrito", None)
+    return redirect(url_for("index"))
+
+# --- Administración ---
 @app.route("/clave")
 def clave():
     return render_template("clave.html")
 
-# Panel de administración
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
     articulos = leer_articulos()
     if request.method == "POST":
-        # Agregar artículo
         nombre = request.form.get("nombre")
         precio = request.form.get("precio")
         stock = request.form.get("stock")
@@ -97,7 +202,6 @@ def admin():
 
     return render_template("admin.html", articulos=articulos)
 
-# Eliminar artículo
 @app.route("/eliminar/<nombre_articulo>")
 def eliminar(nombre_articulo):
     articulos = leer_articulos()
@@ -105,72 +209,6 @@ def eliminar(nombre_articulo):
     guardar_articulos(articulos)
     flash(f"Artículo {nombre_articulo} eliminado")
     return redirect(url_for("admin"))
-
-# Comprar artículo
-@app.route("/comprar/<nombre_articulo>", methods=["GET", "POST"])
-def comprar(nombre_articulo):
-    articulos = leer_articulos()
-    articulo = next((a for a in articulos if a["nombre"] == nombre_articulo), None)
-
-    if not articulo:
-        flash("Artículo no encontrado")
-        return redirect(url_for("index"))
-
-    if request.method == "POST":
-        cliente = request.form.get("cliente")
-        email_cliente = request.form.get("email")
-        celular = request.form.get("celular")
-        cantidad = request.form.get("cantidad")
-
-        if not cliente or not email_cliente or not celular or not cantidad:
-            flash("Todos los campos son obligatorios")
-            return redirect(url_for("comprar", nombre_articulo=nombre_articulo))
-
-        if not celular.isdigit() or len(celular) < 8:
-            flash("Debe ingresar un número de celular válido")
-            return redirect(url_for("comprar", nombre_articulo=nombre_articulo))
-
-        try:
-            cantidad = int(cantidad)
-        except ValueError:
-            flash("La cantidad debe ser un número entero")
-            return redirect(url_for("comprar", nombre_articulo=nombre_articulo))
-
-        if cantidad > articulo["stock"]:
-            flash(f"No hay stock suficiente. Disponible: {articulo['stock']}")
-            return redirect(url_for("comprar", nombre_articulo=nombre_articulo))
-
-        # Descontar stock
-        articulo["stock"] -= cantidad
-        guardar_articulos(articulos)
-
-        # Enviar correo
-        msg = Message(
-            subject=f"Solicitud de compra: {articulo['nombre']}",
-            recipients=["rufina.ventas2025@gmail.com"]
-        )
-        msg.charset = "utf-8"
-        msg.body = f"""
-Solicitud de compra
-Cliente: {cliente}
-Email: {email_cliente}
-Celular: {celular}
-Producto: {articulo['nombre']}
-Precio unitario: ${articulo['precio']}
-Cantidad: {cantidad}
-Total: ${articulo['precio'] * cantidad:.2f}
-Stock restante: {articulo['stock']}
-"""
-        try:
-            mail.send(msg)
-            flash("Solicitud correctamente enviada y stock actualizado.")
-        except Exception as e:
-            flash(f"No se pudo enviar el correo: {str(e)}")
-            app.logger.exception("Error enviando correo")
-
-        return redirect(url_for("index"))
-
-    return render_template("comprar.html", articulo=articulo)
 
 if __name__ == "__main__":
     app.run(debug=True)
