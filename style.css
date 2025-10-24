@@ -6,7 +6,7 @@ body {
     background: #fdfae3;
 }
 
-/* 💥 MODIFICACIÓN AQUÍ: Se eliminan el fondo blanco y la sombra 💥 */
+/* 💥 HEADER MODIFICADO: Mismo fondo que el body y sin sombra 💥 */
 header {
     text-align: center;
     padding: 20px 0;
@@ -156,10 +156,26 @@ header img {
     border-radius: 3px;
     cursor: pointer;
     transition: background 0.3s;
+    margin-right: 5px; /* Espacio entre botones */
 }
 
 .btn-vaciar:hover {
     background-color: #c9302c;
+}
+
+/* 💥 NUEVO ESTILO PARA EL BOTÓN FINALIZAR COMPRA 💥 */
+.btn-finalizar {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-finalizar:hover {
+    background-color: #45a049;
 }
 
 /* Información de envíos y pagos */
