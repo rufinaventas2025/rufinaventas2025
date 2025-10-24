@@ -2,17 +2,27 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Acceso Administrador</title>
-</head>
+    <title>Panel Administrador</title>
+    </head>
 <body>
-<script>
-    let clave = prompt("Ingrese la contraseña de administrador:");
-    if(clave === "Admin@2025"){
-        window.location.href = "/admin";
-    } else {
-        alert("Contraseña incorrecta");
-        window.location.href = "/";
-    }
-</script>
+    <h2>Agregar nuevo artículo</h2>
+    <form method="POST" action="#"> 
+        Nombre: <input type="text" name="nombre"><br>
+        Precio: <input type="text" name="precio"><br>
+        Stock: <input type="text" name="stock"><br>
+        Imágenes: <input type="file" name="imagenes" multiple><br>
+        <button type="submit">Agregar</button>
+    </form>
+
+    <hr>
+    
+    <h2>Eliminar artículos existentes (Simulación)</h2>
+    <p>La gestión de artículos (eliminar) no está disponible en este sitio estático. Necesitas ejecutar el servidor Flask (app3.py) para usar esta funcionalidad.</p>
+    <ul>
+        <li>Cartuchera - Stock: 7 (No funcional)</li>
+        <li>Mochilas - Stock: 5 (No funcional)</li>
+        </ul>
+
+    <a href="../index.html">Volver a la tienda</a>
 </body>
 </html>
