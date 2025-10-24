@@ -6,12 +6,13 @@ body {
     background: #fdfae3;
 }
 
+/* 💥 MODIFICACIÓN AQUÍ: Se eliminan el fondo blanco y la sombra 💥 */
 header {
     text-align: center;
     padding: 20px 0;
-    /* Fondo blanco para el header */
-    background: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* Usar el mismo fondo del body para eliminar la "caja" blanca */
+    background: #fdfae3; 
+    /* Se elimina la sombra (box-shadow) */
     position: relative;
     margin-bottom: 20px;
 }
