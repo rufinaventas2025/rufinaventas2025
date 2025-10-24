@@ -10,7 +10,7 @@
         <img src="./static/img/titulo.png" alt="Rufina Costuras Creativas">
     </header>
 
-    <button class="boton-admin" onclick="toggleAdminMode()">Agregar/Eliminar Artículo</button>
+    <a href="./planillas/clave.html" class="boton-admin">Agregar/Eliminar Artículo</a>
 
     <div id="carrito">
         <h3>🛍️ Carrito</h3>
@@ -139,7 +139,7 @@
             actualizarCarrito();
         }
 
-        // 💥 FUNCIÓN PARA FINALIZAR COMPRA 💥
+        // FUNCIÓN PARA FINALIZAR COMPRA
         function finalizarCompra() {
             if (carrito.length === 0) {
                 alert("El carrito está vacío. ¡Agrega algunos productos antes de finalizar la compra!");
@@ -153,40 +153,6 @@
             }
         }
         
-        // 💥 FUNCIÓN MODO ADMINISTRADOR (Simulación) 💥
-        let isAdminMode = false;
-
-        function toggleAdminMode() {
-            isAdminMode = !isAdminMode;
-            const adminButton = document.querySelector('.boton-admin');
-            const comprarButtons = document.querySelectorAll('.boton-comprar');
-            const carrito = document.getElementById('carrito');
-            const articulos = document.querySelectorAll('.articulo');
-
-            if (isAdminMode) {
-                alert("¡Modo Administrador ACTIVADO! Se han ocultado los botones de compra.");
-                adminButton.textContent = "Salir del Modo Admin";
-                
-                // Ocultar botones de compra y carrito
-                comprarButtons.forEach(btn => btn.style.display = 'none');
-                carrito.style.display = 'none';
-
-                // Simulación visual de gestión (ej. agregar un borde rojo)
-                articulos.forEach(art => art.style.border = '2px solid red');
-
-            } else {
-                alert("Modo Administrador DESACTIVADO. La tienda vuelve al modo normal.");
-                adminButton.textContent = "Agregar/Eliminar Artículo";
-                
-                // Mostrar botones de compra y carrito
-                comprarButtons.forEach(btn => btn.style.display = 'inline-block');
-                carrito.style.display = 'block';
-
-                // Revertir el estilo visual
-                articulos.forEach(art => art.style.border = '1px solid #e0e0e0');
-            }
-        }
-
         // Carrusel automático
         document.querySelectorAll('.carousel').forEach(carousel => {
             const imgs = carousel.querySelectorAll('img');
