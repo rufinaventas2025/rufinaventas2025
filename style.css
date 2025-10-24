@@ -1,110 +1,282 @@
-body { 
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: #f7f7f7;
+    /* Color de fondo que hace juego con el diseño */
+    background: #fdfae3;
 }
 
 header {
     text-align: center;
     padding: 20px 0;
+    /* Fondo blanco para el header */
     background: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: relative;
+    margin-bottom: 20px;
 }
 
-.titulo-dorado {
-    color: goldenrod;
-    text-align: center;
-    font-size: 2em;
-    margin: 0;
+header img {
+    /* Asegura que la imagen del título no sea demasiado grande */
+    max-width: 80%;
+    height: auto;
 }
 
-.btn-admin {
+/* Botón de Administración */
+.boton-admin {
     position: absolute;
     right: 20px;
-    top: 25px;
-    background: goldenrod;
+    top: 20px;
+    background: #a0522d; /* Marrón elegante */
     color: white;
     padding: 8px 12px;
     border-radius: 5px;
     text-decoration: none;
+    font-weight: bold;
+    z-index: 10;
 }
 
-.productos-container {
+/* Contenedor principal de artículos */
+.articulos {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
     padding: 20px;
+    margin-bottom: 30px;
 }
 
-.producto-card {
+/* Tarjeta individual de artículo */
+.articulo {
     background: #fff;
     padding: 15px;
     border-radius: 10px;
     width: 250px;
     text-align: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
+    transition: transform 0.2s;
 }
 
-.producto-card img {
-    width: 100%;
+.articulo:hover {
+    transform: translateY(-5px);
+}
+
+.articulo h3 {
+    color: #a0522d;
+    font-size: 1.2em;
+    margin-top: 0;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+}
+
+/* Carrusel de imágenes */
+.carousel {
+    position: relative;
     height: 200px;
-    object-fit: cover;
+    overflow: hidden;
     border-radius: 5px;
     margin-bottom: 10px;
 }
 
-.carrusel {
-    display: flex;
-    overflow-x: auto;
-    gap: 5px;
-    scrollbar-width: thin;
+.carousel img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Para que la imagen se ajuste sin cortarse */
+    opacity: 1;
+    transition: opacity 0.5s;
 }
 
-.carrusel img {
-    flex: 0 0 auto;
-    width: 100%;
-    max-width: 100%;
+.carousel img.inactive {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Texto de precio y stock */
+.articulo p {
+    margin: 5px 0;
+    font-size: 0.95em;
+    color: #333;
 }
 
 /* Botón Agregar al carrito */
-.btn-comprar {
+.boton-comprar {
     display: inline-block;
-    background-color: #C49E70 !important; /* Marrón clarito elegante */
-    color: #fff !important;
+    background-color: #C49E70; /* Marrón clarito elegante */
+    color: #fff;
     padding: 8px 12px;
-    margin-top: 5px;
+    margin-top: 10px;
     text-decoration: none;
     border-radius: 5px;
     border: none;
     cursor: pointer;
     transition: background 0.3s;
-}
-
-.btn-comprar:hover {
-    background-color: #B8865B !important; /* Marrón más oscuro al pasar el mouse */
-}
-
-.sin-stock {
-    color: red;
     font-weight: bold;
 }
 
-footer {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
+.boton-comprar:hover {
+    background-color: #B8865B; /* Marrón más oscuro al pasar el mouse */
+}
+
+/* Carrito lateral/superior */
+#carrito {
+    width: 250px;
+    padding: 15px;
+    background: #ffffed; /* Amarillo muy claro para resaltarlo */
+    border: 1px solid #a0522d;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin: 20px auto;
+    text-align: center;
+}
+
+#carrito h3 {
+    margin-top: 0;
+    color: #a0522d;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 5px;
+}
+
+#lista-carrito {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.btn-vaciar {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-vaciar:hover {
+    background-color: #c9302c;
+}
+
+/* Información de envíos y pagos */
+.info-envios {
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.info-envios h3 {
+    color: #a0522d;
+    border-bottom: 2px solid #C49E70;
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+
+.info-envios p {
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Footer (fijo/posición absoluta según lo que necesites) */
+.footer {
+    padding: 10px;
     text-align: right;
-    font-size: 0.9em;
+    font-size: 0.85em;
+    color: #a0522d;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+    z-index: 100;
 }
 
-.footer-titulo {
-    color: goldenrod;
+
+/* MODAL de imágenes */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 9999; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.9);
+}
+
+#modal-img {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+.cerrar {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
     font-weight: bold;
+    transition: 0.3s;
 }
 
-.footer-nombre {
-    color: brown;
+.cerrar:hover,
+.cerrar:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.prev {
+    left: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
 }
