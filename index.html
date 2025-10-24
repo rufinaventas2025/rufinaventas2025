@@ -1,203 +1,189 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Rufina Costura Creativa</title>
-    <link rel="stylesheet" href="estilos.css"> </head>
+    <meta charset="UTF-8">
+    <title>Rufina Costura Creativa</title>
+        <link rel="stylesheet" href="style.css">
+</head>
 <body>
-    <header>
-        <img src="./static/img/titulo.png" alt="Rufina Costuras Creativas">
-    </header>
+        <header>
+        <img src="./static/img/titulo.png" alt="Rufina Costuras Creativas">
+    </header>
 
-    <a href="#" class="boton-admin">Agregar/Eliminar Artículo</a>
+        <a href="#" class="boton-admin">Agregar/Eliminar Artículo</a>
 
-    <div id="carrito">
-        <h3>🛍️ Carrito</h3>
-        <ul id="lista-carrito"></ul>
-        <p>Total: $<span id="total">0</span></p>
-        <button class="btn-vaciar" onclick="vaciarCarrito()">Vaciar</button>
-        <button class="btn-finalizar" onclick="finalizarCompra()">Finalizar Compra</button>
-    </div>
+        <div id="carrito">
+        <h3>🛍️ Carrito</h3>
+        <ul id="lista-carrito"></ul>
+        <p>Total: $<span id="total">0</span></p>
+        <button class="btn-vaciar" onclick="vaciarCarrito()">Vaciar</button>
+    </div>
 
-    <div class="articulos">
+        <div class="articulos">
 
-        <div class="articulo">
-            <h3>Cartuchera</h3>
-            <div class="carousel">
-                <img src="./static/images/cartuchera.jpg" class="">
-            </div>
-            <p>Precio: $600.0</p>
-            <p>Stock: 7</p>
-            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Cartuchera',600)">Agregar al carrito</a>
-        </div>
+                <div class="articulo">
+            <h3>Cartuchera</h3>
+            <div class="carousel">
+                <img src="./static/images/cartuchera.jpg" class="">
+            </div>
+            <p>Precio: $600.0</p>
+            <p>Stock: 7</p>
+            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Cartuchera',600)">Agregar al carrito</a>
+        </div>
 
-        <div class="articulo">
-            <h3>Mochilas</h3>
-            <div class="carousel">
-                <img src="./static/images/mochilas.png" class="">
-            </div>
-            <p>Precio: $2300.0</p>
-            <p>Stock: 5</p>
-            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Mochilas',2300)">Agregar al carrito</a>
-        </div>
+                <div class="articulo">
+            <h3>Mochilas</h3>
+            <div class="carousel">
+                <img src="./static/images/mochilas.png" class="">
+            </div>
+            <p>Precio: $2300.0</p>
+            <p>Stock: 5</p>
+            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Mochilas',2300)">Agregar al carrito</a>
+        </div>
 
-        <div class="articulo">
-            <h3>Cartera</h3>
-            <div class="carousel">
-                <img src="./static/images/funda-para-mate.webp" class=""> 
-            </div>
-            <p>Precio: $1800.0</p>
-            <p>Stock: 4</p>
-            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Cartera',1800)">Agregar al carrito</a>
-        </div>
+                <div class="articulo">
+            <h3>Cartera</h3>
+            <div class="carousel">
+                <img src="./static/images/funda-para-mate.webp" class=""> 
+            </div>
+            <p>Precio: $1800.0</p>
+            <p>Stock: 4</p>
+            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Cartera',1800)">Agregar al carrito</a>
+        </div>
 
-        <div class="articulo">
-            <h3>Monederos</h3>
-            <div class="carousel">
-                <img src="./static/images/monedero 1.jpg" class="">
-                <img src="./static/images/monedero 2.jpg" class="inactive">
-                <img src="./static/images/monedero 3.jpg" class="inactive">
-            </div>
-            <p>Precio: $600.0</p>
-            <p>Stock: 6</p>
-            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Monederos',600)">Agregar al carrito</a>
-        </div>
+                <div class="articulo">
+            <h3>Monederos</h3>
+            <div class="carousel">
+                <img src="./static/images/monedero 1.jpg" class="">
+                <img src="./static/images/monedero 2.jpg" class="inactive">
+                <img src="./static/images/monedero 3.jpg" class="inactive">
+            </div>
+            <p>Precio: $600.0</p>
+            <p>Stock: 6</p>
+            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Monederos',600)">Agregar al carrito</a>
+        </div>
 
-        <div class="articulo">
-            <h3>Porta mate</h3>
-            <div class="carousel">
-                <img src="./static/images/portamate.jpg" class="">
-                <img src="./static/images/portamate2.jpg" class="inactive">
-            </div>
-            <p>Precio: $1300.0</p>
-            <p>Stock: 5</p>
-            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Porta mate',1300)">Agregar al carrito</a>
-        </div>
+                <div class="articulo">
+            <h3>Porta mate</h3>
+            <div class="carousel">
+                <img src="./static/images/portamate.jpg" class="">
+                <img src="./static/images/portamate2.jpg" class="inactive">
+            </div>
+            <p>Precio: $1300.0</p>
+            <p>Stock: 5</p>
+            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Porta mate',1300)">Agregar al carrito</a>
+        </div>
 
-        <div class="articulo">
-            <h3>Matera</h3>
-            <div class="carousel">
-                <img src="./static/images/matera.jpg" class="">
-            </div>
-            <p>Precio: $1300.0</p>
-            <p>Stock: 6</p>
-            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Matera',1300)">Agregar al carrito</a>
-        </div>
+                <div class="articulo">
+            <h3>Matera</h3>
+            <div class="carousel">
+                <img src="./static/images/matera.jpg" class="">
+            </div>
+            <p>Precio: $1300.0</p>
+            <p>Stock: 6</p>
+            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Matera',1300)">Agregar al carrito</a>
+        </div>
 
-    </div>
+    </div>
 
-    <div class="info-envios">
-        <h3>ENVÍOS</h3>
-        <p>Si tu compra es de productos en stock, el envío se realizará en un máximo de 48 hs (días hábiles), si el producto es personalizado la demora será de 7 a 10 días hábiles una vez realizado el pago.</p>
-        <p>Los envíos se realizan por agencia DAC, el costo de envío es a cargo del comprador.</p>
-        <p>También podes pasar a retirar tu pedido en la zona de 8 de Octubre y Garibaldi de lunes a viernes de 8:30 a 15:30, día y hora a coordinar.</p>
+        <div class="info-envios">
+        <h3>ENVÍOS</h3>
+        <p>Si tu compra es de productos en stock, el envío se realizará en un máximo de 48 hs (días hábiles), si el producto es personalizado la demora será de 7 a 10 días hábiles una vez realizado el pago.</p>
+        <p>Los envíos se realizan por agencia DAC, el costo de envío es a cargo del comprador.</p>
+        <p>También podes pasar a retirar tu pedido en la zona de 8 de Octubre y Garibaldi de lunes a viernes de 8:30 a 15:30, día y hora a coordinar.</p>
 
-        <h3>COMO PAGAR</h3>
-        <p>Podes pagar tus compras en depósito o transferencia a Brou o tarjeta PREX.</p>
-        <p>Mercado pago hasta en 12 cuotas con un adicional del 10% por comisión (pedir link de pago).</p>
+        <h3>COMO PAGAR</h3>
+        <p>Podes pagar tus compras en depósito o transferencia a Brou o tarjeta PREX.</p>
+        <p>Mercado pago hasta en 12 cuotas con un adicional del 10% por comisión (pedir link de pago).</p>
 
-        <h3>ELECCIÓN DE PRODUCTOS EN TELAS QUE NO ESTÉN EN STOCK</h3>
-        <p>Solicita catálogo de telas al cel.: 094 363 375.</p>
-    </div>
+        <h3>ELECCIÓN DE PRODUCTOS EN TELAS QUE NO ESTÉN EN STOCK</h3>
+        <p>Solicita catálogo de telas al cel.: 094 363 375.</p>
+    </div>
 
-    <div class="footer">
-        Rufina Costura Creativa<br>
-        Laura Rodríguez - cel. 094.363.375
-    </div>
+        <div class="footer">
+        Rufina Costura Creativa<br>
+        Laura Rodríguez - cel. 094.363.375
+    </div>
 
-    <div class="modal" id="modal">
-        <span class="cerrar">&times;</span>
-        <span class="prev">&#10094;</span>
-        <span class="next">&#10095;</span>
-        <img id="modal-img">
-        <div id="caption"></div>
-    </div>
+        <div class="modal" id="modal">
+        <span class="cerrar">&times;</span>
+        <span class="prev">&#10094;</span>
+        <span class="next">&#10095;</span>
+        <img id="modal-img">
+        <div id="caption"></div>
+    </div>
 
-    <script>
-        // Carrito
-        let carrito = [];
-        function agregarAlCarrito(nombre, precio) {
-            carrito.push({nombre, precio});
-            actualizarCarrito();
-        }
-        function actualizarCarrito() {
-            const lista = document.getElementById('lista-carrito');
-            const total = document.getElementById('total');
-            lista.innerHTML = '';
-            let suma = 0;
-            carrito.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = item.nombre + ' $' + item.precio;
-                lista.appendChild(li);
-                suma += item.precio;
-            });
-            total.textContent = suma;
-        }
-        function vaciarCarrito() {
-            carrito = [];
-            actualizarCarrito();
-        }
+        <script>
+        // Carrito
+        let carrito = [];
+        function agregarAlCarrito(nombre, precio) {
+            carrito.push({nombre, precio});
+            actualizarCarrito();
+        }
+        function actualizarCarrito() {
+            const lista = document.getElementById('lista-carrito');
+            const total = document.getElementById('total');
+            lista.innerHTML = '';
+            let suma = 0;
+            carrito.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.nombre + ' $' + item.precio;
+                lista.appendChild(li);
+                suma += item.precio;
+            });
+            total.textContent = suma;
+        }
+        function vaciarCarrito() {
+            carrito = [];
+            actualizarCarrito();
+        }
 
-        // 💥 NUEVA FUNCIÓN PARA FINALIZAR COMPRA 💥
-        function finalizarCompra() {
-            if (carrito.length === 0) {
-                alert("El carrito está vacío. ¡Agrega algunos productos antes de finalizar la compra!");
-            } else {
-                const totalCompra = document.getElementById('total').textContent;
-                // Mensaje final con instrucciones
-                alert(`¡Gracias por tu compra en Rufina! El total es de $${totalCompra}. Por favor, contáctanos para coordinar el pago y el envío.`);
-                
-                // Vaciar el carrito después de "finalizar"
-                vaciarCarrito();
-            }
-        }
+        // Carrusel automático
+        document.querySelectorAll('.carousel').forEach(carousel => {
+            const imgs = carousel.querySelectorAll('img');
+            let index = 0;
+            setInterval(() => {
+                imgs[index].classList.add('inactive');
+                index = (index + 1) % imgs.length;
+                imgs[index].classList.remove('inactive');
+            }, 2000);
+        });
 
-        // Carrusel automático
-        document.querySelectorAll('.carousel').forEach(carousel => {
-            const imgs = carousel.querySelectorAll('img');
-            let index = 0;
-            setInterval(() => {
-                imgs[index].classList.add('inactive');
-                index = (index + 1) % imgs.length;
-                imgs[index].classList.remove('inactive');
-            }, 2000);
-        });
+        // Modal imágenes
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modal-img');
+        const caption = document.getElementById('caption');
+        let currentIndex = 0;
+        let articuloImgs = [];
 
-        // Modal imágenes
-        const modal = document.getElementById('modal');
-        const modalImg = document.getElementById('modal-img');
-        const caption = document.getElementById('caption');
-        let currentIndex = 0;
-        let articuloImgs = [];
+        document.querySelectorAll('.articulo').forEach(art => {
+            art.querySelectorAll('img').forEach(img => {
+                img.onclick = function() {
+                    articuloImgs = Array.from(art.querySelectorAll('img'));
+                    currentIndex = Array.from(articuloImgs).indexOf(this);
+                    showModal();
+                }
+            });
+        });
 
-        document.querySelectorAll('.articulo').forEach(art => {
-            art.querySelectorAll('img').forEach(img => {
-                img.onclick = function() {
-                    articuloImgs = Array.from(art.querySelectorAll('img'));
-                    currentIndex = Array.from(articuloImgs).indexOf(this);
-                    showModal();
-                }
-            });
-        });
+        function showModal() {
+            modal.style.display = 'block';
+            modalImg.src = articuloImgs[currentIndex].src;
+            caption.textContent = articuloImgs[currentIndex].alt;
+        }
 
-        function showModal() {
-            modal.style.display = 'block';
-            modalImg.src = articuloImgs[currentIndex].src;
-            caption.textContent = articuloImgs[currentIndex].alt;
-        }
-
-        document.querySelector('.cerrar').onclick = () => modal.style.display = 'none';
-        document.querySelector('.prev').onclick = () => {
-            currentIndex = (currentIndex - 1 + articuloImgs.length) % articuloImgs.length;
-            showModal();
-        }
-        document.querySelector('.next').onclick = () => {
-            currentIndex = (currentIndex + 1) % articuloImgs.length;
-            showModal();
-        }
-        modal.onclick = function(event) {
-            if(event.target == modal) modal.style.display = 'none';
-        }
-    </script>
+        document.querySelector('.cerrar').onclick = () => modal.style.display = 'none';
+        document.querySelector('.prev').onclick = () => {
+            currentIndex = (currentIndex - 1 + articuloImgs.length) % articuloImgs.length;
+            showModal();
+        }
+        document.querySelector('.next').onclick = () => {
+            currentIndex = (currentIndex + 1) % articuloImgs.length;
+            showModal();
+        }
+        modal.onclick = function(event) {
+            if(event.target == modal) modal.style.display = 'none';
+        }
+    </script>
 </body>
 </html>
