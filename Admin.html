@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Acceso de Administración</title>
+</head>
+<body>
+    <script>
+        // Función de acceso al administrador que se ejecuta inmediatamente
+        function accesoAdminInmediato() {
+            // NOTA: Esta ruta debe coincidir con la ubicación real de tu página de administración
+            const adminUrl = "/rufinaventas2025/templates/clave.html"; 
+            const tiendaUrl = "/rufinaventas2025/index.html";
+            
+            // Solicitar la contraseña
+            const password = prompt("Ingrese la contraseña de Administrador de Ventas:");
+            
+            // La contraseña es "Admin@2025"
+            if (password === "Admin@2025") { 
+                window.location.href = adminUrl; 
+            } else {
+                // Si falla o cancela, lo devuelve a la página principal
+                alert("Contraseña incorrecta o acceso cancelado. Volviendo a la tienda."); 
+                window.location.href = tiendaUrl;
+            }
+        }
+
+        // Ejecutar la función inmediatamente al cargar la página
+        accesoAdminInmediato();
+    </script>
+    <p>Cargando... Si no se muestra el diálogo de contraseña, habilite las ventanas emergentes o intente recargar.</p>
+</body>
+</html>
