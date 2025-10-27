@@ -28,7 +28,8 @@
                 <img src="./static/images/cartuchera.jpg" alt="Cartuchera Abierta" class="">
             </div>
             <p>Precio: $600.0</p>
-            <p class="estado-stock">Con Stock</p> <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Cartuchera',600)">Agregar al carrito</a>
+            <p class="estado-stock">Con Stock</p> 
+            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Cartuchera',600)">Agregar al carrito</a>
         </div>
 
         <div class="articulo">
@@ -37,7 +38,8 @@
                 <img src="./static/images/mochilas.png" alt="Mochilas con diseños" class="">
             </div>
             <p>Precio: $2300.0</p>
-            <p class="estado-stock">Con Stock</p> <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Mochilas',2300)">Agregar al carrito</a>
+            <p class="estado-stock">Con Stock</p> 
+            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Mochilas',2300)">Agregar al carrito</a>
         </div>
 
         <div class="articulo">
@@ -46,7 +48,8 @@
                 <img src="./static/images/funda-para-mate.webp" alt="Funda o Cartera para Mate" class=""> 
             </div>
             <p>Precio: $1800.0</p>
-            <p class="estado-stock">Con Stock</p> <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Cartera',1800)">Agregar al carrito</a>
+            <p class="estado-stock">Con Stock</p> 
+            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Cartera',1800)">Agregar al carrito</a>
         </div>
 
         <div class="articulo">
@@ -57,7 +60,8 @@
                 <img src="./static/images/monedero 3.jpg" alt="Monedero diseño 3" class="inactive">
             </div>
             <p>Precio: $600.0</p>
-            <p class="estado-stock">Con Stock</p> <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Monederos',600)">Agregar al carrito</a>
+            <p class="estado-stock">Con Stock</p> 
+            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Monederos',600)">Agregar al carrito</a>
         </div>
 
         <div class="articulo">
@@ -67,7 +71,8 @@
                 <img src="./static/images/portamate2.jpg" alt="Porta Mate diseño 2" class="inactive">
             </div>
             <p>Precio: $1300.0</p>
-            <p class="estado-stock">Con Stock</p> <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Porta mate',1300)">Agregar al carrito</a>
+            <p class="estado-stock">Con Stock</p> 
+            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Porta mate',1300)">Agregar al carrito</a>
         </div>
 
         <div class="articulo">
@@ -76,7 +81,8 @@
                 <img src="./static/images/matera.jpg" alt="Matera diseño" class="">
             </div>
             <p>Precio: $1300.0</p>
-            <p class="estado-stock">Con Stock</p> <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Matera',1300)">Agregar al carrito</a>
+            <p class="estado-stock">Con Stock</p> 
+            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Matera',1300)">Agregar al carrito</a>
         </div>
 
     </div>
@@ -194,7 +200,7 @@
             // La contraseña está definida aquí
             const password = prompt("Ingrese la contraseña de Administrador de Ventas:");
     
-            if (password === "Admin@2025") { // Contraseña modificada
+            if (password === "Admin@2025") { // Contraseña: Admin@2025
                 window.location.href = adminUrl; 
             } else if (password !== null) {
                 alert("Contraseña incorrecta. Acceso denegado."); 
@@ -271,6 +277,26 @@
         modal.onclick = function(event) {
             if(event.target == modal) modal.style.display = 'none';
         }
+
+        /* --- CIERRE DE MODALES CON TECLADO (ESCAPE/X) --- */
+        document.addEventListener('keydown', function(event) {
+            const modalGaleria = document.getElementById('modal');
+            const modalCompra = document.getElementById('modal-compra');
+
+            if (event.key === "Escape" || event.key === "x" || event.key === "X") {
+                // Cierra el modal de la Galería de Imágenes si está abierto
+                if (modalGaleria.style.display === 'block') {
+                    modalGaleria.style.display = 'none';
+                    return;
+                }
+
+                // Cierra el modal de Finalizar Compra si está abierto
+                if (modalCompra.style.display === 'block') {
+                    ocultarModalCompra(); // Usa la función existente para resetear el formulario
+                    return;
+                }
+            }
+        });
     </script>
 </body>
 </html>
