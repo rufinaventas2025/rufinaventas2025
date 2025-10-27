@@ -10,7 +10,7 @@
         <img src="./static/img/titulo.png" alt="Rufina Costuras Creativas">
     </header>
 
-    <a href="/rufinaventas2025/templates/clave.html" class="boton-admin">Agregar/Eliminar Artículo</a>
+    <button class="boton-admin" onclick="accesoAdmin()">Agregar/Eliminar Artículo</button>
 
     <div id="carrito">
         <h3>🛍️ Carrito</h3>
@@ -115,7 +115,22 @@
     </div>
 
     <script>
-        // Carrito y Carrusel (código JS)
+        // Función de Acceso al Administrador (NUEVA)
+        function accesoAdmin() {
+            // Se usa la ruta absoluta que ya corrigió el error 404. Usando 'templates' y 'rufinaventas2025'.
+            const adminUrl = "/rufinaventas2025/templates/clave.html"; 
+            
+            // Pide la contraseña. Puedes cambiar "1234" por la contraseña que desees.
+            const password = prompt("Ingrese la contraseña de administrador:");
+
+            if (password === "1234") { 
+                window.location.href = adminUrl; // Redirige si es correcta
+            } else if (password !== null) {
+                alert("Contraseña incorrecta. Acceso denegado."); 
+            }
+        }
+        
+        // Carrito (resto del código JS)
         let carrito = [];
         function agregarAlCarrito(nombre, precio) {
             carrito.push({nombre, precio});
