@@ -10,7 +10,7 @@
         <img src="./static/img/titulo.png" alt="Rufina Costuras Creativas">
     </header>
 
-    <a href="/plantillas/clave.html" class="boton-admin">Agregar/Eliminar Artículo</a>>
+    <a href="/plantillas/clave.html" class="boton-admin">Agregar/Eliminar Artículo</a>
 
     <div id="carrito">
         <h3>🛍️ Carrito</h3>
@@ -21,7 +21,6 @@
     </div>
 
     <div class="articulos">
-
         <div class="articulo">
             <h3>Cartuchera</h3>
             <div class="carousel">
@@ -115,7 +114,7 @@
     </div>
 
     <script>
-        // Carrito
+        // Carrito y Carrusel (código JS completo)
         let carrito = [];
         function agregarAlCarrito(nombre, precio) {
             carrito.push({nombre, precio});
@@ -139,7 +138,6 @@
             actualizarCarrito();
         }
 
-        // FUNCIÓN PARA FINALIZAR COMPRA
         function finalizarCompra() {
             if (carrito.length === 0) {
                 alert("El carrito está vacío. ¡Agrega algunos productos antes de finalizar la compra!");
@@ -150,11 +148,9 @@
             }
         }
         
-        // Carrusel automático
         document.querySelectorAll('.carousel').forEach(carousel => {
             const imgs = carousel.querySelectorAll('img');
             let index = 0;
-            // Solo iniciar si hay más de una imagen
             if (imgs.length > 1) { 
                 setInterval(() => {
                     imgs[index].classList.add('inactive');
@@ -164,7 +160,6 @@
             }
         });
 
-        // Modal imágenes
         const modal = document.getElementById('modal');
         const modalImg = document.getElementById('modal-img');
         const caption = document.getElementById('caption');
