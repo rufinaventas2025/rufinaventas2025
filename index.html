@@ -17,11 +17,10 @@
         <ul id="lista-carrito"></ul>
         <p>Total: $<span id="total">0</span></p>
         <button class="btn-vaciar" onclick="vaciarCarrito()">Vaciar</button>
-        <button class="btn-finalizar" onclick="finalizarCompra()">Finalizar Compra</button>
+        <button class="btn-finalizar" onclick="mostrarModalCompra()">Finalizar Compra</button>
     </div>
 
     <div class="articulos">
-
         <div class="articulo">
             <h3>Cartuchera</h3>
             <div class="carousel">
@@ -113,24 +112,99 @@
         <img id="modal-img">
         <div id="caption"></div>
     </div>
-
+    
+    <div class="modal" id="modal-compra" style="display:none;">
+        <div class="modal-content">
+            <span class="close-compra">&times;</span>
+            <h2>Finalizar compra</h2>
+            <form id="formulario-compra">
+                <label for="nombre-compra">Tu nombre</label>
+                <input type="text" id="nombre-compra" required><br>
+                
+                <label for="correo-compra">Tu correo</label>
+                <input type="email" id="correo-compra" required><br>
+                
+                <label for="telefono-compra">Tu teléfono</label>
+                <input type="tel" id="telefono-compra" required><br>
+                
+                <button type="submit" id="enviar-pedido">Enviar pedido</button>
+                <button type="button" id="cancelar-pedido">Cancelar</button>
+            </form>
+        </div>
+    </div>
+    
     <script>
-        // Función de Acceso al Administrador (NUEVA)
-        function accesoAdmin() {
-            // Se usa la ruta absoluta que ya corrigió el error 404. Usando 'templates' y 'rufinaventas2025'.
-            const adminUrl = "/rufinaventas2025/templates/clave.html"; 
+        // --- Variables y Funciones para el Modal de Compra ---
+        const modalCompra = document.getElementById('modal-compra');
+        const closeCompra = document.querySelector('.close-compra');
+        const formularioCompra = document.getElementById('formulario-compra');
+        const botonCancelar = document.getElementById('cancelar-pedido');
+    
+        function mostrarModalCompra() {
+            if (carrito.length === 0) {
+                alert("El carrito está vacío. ¡Agrega algunos productos antes de finalizar la compra!");
+                return;
+            }
+            modalCompra.style.display = 'block';
+        }
+    
+        function ocultarModalCompra() {
+            modalCompra.style.display = 'none';
+            formularioCompra.reset();
+        }
+        
+        closeCompra.onclick = ocultarModalCompra;
+        botonCancelar.onclick = ocultarModalCompra;
+        window.onclick = function(event) {
+            if (event.target == modalCompra) {
+                ocultarModalCompra();
+            }
+        }
+    
+        // Lógica para enviar el pedido (Simulación por WhatsApp)
+        formularioCompra.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+    
+            const nombre = document.getElementById('nombre-compra').value;
+            const telefono = document.getElementById('telefono-compra').value;
+            const totalCompra = document.getElementById('total').textContent;
+    
+            let mensaje = `¡Hola Rufina! Soy ${nombre} (Teléfono: ${telefono}) y me gustaría hacer un pedido:\n\n`;
+    
+            // Detalle de los artículos
+            carrito.forEach(item => {
+                mensaje += `- ${item.nombre}: $${item.precio}\n`;
+            });
             
-            // Pide la contraseña. Puedes cambiar "1234" por la contraseña que desees.
-            const password = prompt("Ingrese la contraseña de administrador:");
-
+            mensaje += `\nTOTAL A PAGAR: $${totalCompra}`;
+            mensaje += "\n\nPor favor, responde este mensaje para coordinar el pago y la entrega.";
+    
+            // Enlace a WhatsApp (Usando el número de la información de tu footer: 094 363 375 -> +59894363375)
+            const whatsappLink = `https://wa.me/59894363375?text=${encodeURIComponent(mensaje)}`; 
+    
+            // Redirigir y simular descuento de stock
+            window.open(whatsappLink, '_blank'); 
+            ocultarModalCompra();
+            vaciarCarrito();
+            alert("¡Pedido enviado a WhatsApp! Por favor, revisa la nueva pestaña para confirmar.");
+        });
+    
+    
+        // --- FUNCIONES DE CARRITO Y ADMINISTRADOR ---
+    
+        // Función de Acceso al Administrador (CON CONTRASEÑA JS)
+        function accesoAdmin() {
+            // Ruta absoluta corregida: /rufinaventas2025/templates/clave.html
+            const adminUrl = "/rufinaventas2025/templates/clave.html"; 
+            const password = prompt("Ingrese la contraseña de administrador (1234):");
+    
             if (password === "1234") { 
-                window.location.href = adminUrl; // Redirige si es correcta
+                window.location.href = adminUrl; 
             } else if (password !== null) {
                 alert("Contraseña incorrecta. Acceso denegado."); 
             }
         }
-        
-        // Carrito (resto del código JS)
+    
         let carrito = [];
         function agregarAlCarrito(nombre, precio) {
             carrito.push({nombre, precio});
@@ -153,17 +227,8 @@
             carrito = [];
             actualizarCarrito();
         }
-
-        function finalizarCompra() {
-            if (carrito.length === 0) {
-                alert("El carrito está vacío. ¡Agrega algunos productos antes de finalizar la compra!");
-            } else {
-                const totalCompra = document.getElementById('total').textContent;
-                alert(`¡Gracias por tu compra en Rufina! El total es de $${totalCompra}. Por favor, contáctanos para coordinar el pago y el envío.`);
-                vaciarCarrito();
-            }
-        }
-        
+    
+        // Carrusel y Modal de Imágenes
         document.querySelectorAll('.carousel').forEach(carousel => {
             const imgs = carousel.querySelectorAll('img');
             let index = 0;
@@ -175,13 +240,13 @@
                 }, 2000);
             }
         });
-
+    
         const modal = document.getElementById('modal');
         const modalImg = document.getElementById('modal-img');
         const caption = document.getElementById('caption');
         let currentIndex = 0;
         let articuloImgs = [];
-
+    
         document.querySelectorAll('.articulo').forEach(art => {
             art.querySelectorAll('img').forEach(img => {
                 img.onclick = function() {
@@ -191,13 +256,13 @@
                 }
             });
         });
-
+    
         function showModal() {
             modal.style.display = 'block';
             modalImg.src = articuloImgs[currentIndex].src;
             caption.textContent = articuloImgs[currentIndex].alt;
         }
-
+    
         document.querySelector('.cerrar').onclick = () => modal.style.display = 'none';
         document.querySelector('.prev').onclick = () => {
             currentIndex = (currentIndex - 1 + articuloImgs.length) % articuloImgs.length;
