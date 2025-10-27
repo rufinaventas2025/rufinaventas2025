@@ -145,14 +145,13 @@
                 alert("El carrito está vacío. ¡Agrega algunos productos antes de finalizar la compra!");
             } else {
                 const totalCompra = document.getElementById('total').textContent;
-                // Mensaje final con instrucciones
                 alert(`¡Gracias por tu compra en Rufina! El total es de $${totalCompra}. Por favor, contáctanos para coordinar el pago y el envío.`);
-                
-                // Vaciar el carrito después de "finalizar"
                 vaciarCarrito();
             }
         }
         
+        // El script toggleAdminMode() fue eliminado ya que el botón ahora es un enlace.
+
         // Carrusel automático
         document.querySelectorAll('.carousel').forEach(carousel => {
             const imgs = carousel.querySelectorAll('img');
