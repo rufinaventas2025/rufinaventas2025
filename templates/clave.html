@@ -3,7 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Panel Administrador</title>
-    </head>
+    <link rel="stylesheet" href="../style.css"> 
+    <style>
+        /* Estilos específicos para esta página */
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background-color: #fdfae3; /* Mismo fondo que index.html */
+            color: #333;
+        }
+        h2 { 
+            color: #a0522d; /* Marrón de tu diseño */
+            border-bottom: 2px solid #C49E70;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        form, ul, p {
+            max-width: 600px;
+            margin: 15px auto;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        input[type="text"], button[type="submit"] {
+            margin-bottom: 10px;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50; /* Verde para agregar */
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        a {
+            color: #C49E70;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
 <body>
     <h2>Agregar nuevo artículo</h2>
     <form method="POST" action="#"> 
@@ -17,7 +58,7 @@
     <hr>
     
     <h2>Eliminar artículos existentes (Simulación)</h2>
-    <p>La gestión de artículos (eliminar) no está disponible en este sitio estático. Necesitas ejecutar el servidor Flask (app3.py) para usar esta funcionalidad.</p>
+    <p>La gestión de artículos (eliminar) **no está disponible en este sitio estático**. Esta funcionalidad solo es posible al ejecutar el servidor Flask (app3.py) con una base de datos.</p>
     <ul>
         <li>Cartuchera - Stock: 7 (No funcional)</li>
         <li>Mochilas - Stock: 5 (No funcional)</li>
