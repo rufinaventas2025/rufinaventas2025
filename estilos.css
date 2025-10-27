@@ -1,0 +1,351 @@
+/* ===================================================================
+   ESTILOS GENERALES
+=================================================================== */
+
+/* Fuente base y fondo beige para la tienda */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fdfae3; 
+    color: #333;
+}
+
+/* Contenedor principal para centrar el contenido */
+body > div, body > header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* ===================================================================
+   HEADER Y TÍTULO
+=================================================================== */
+
+header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+header img {
+    /* Ajuste de tamaño para el logo grande y centrado */
+    max-width: 600px; 
+    height: auto;
+}
+
+/* ===================================================================
+   BOTÓN DE ADMINISTRADOR
+=================================================================== */
+
+.boton-admin {
+    /* Posición en la esquina superior derecha, con color y estilo */
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #a0522d; /* Marrón oscuro */
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 1000;
+}
+
+.boton-admin:hover {
+    background-color: #8b4513;
+}
+
+/* ===================================================================
+   CARRITO
+=================================================================== */
+
+#carrito {
+    /* Estilo y posición flotante superior izquierda */
+    position: fixed;
+    top: 140px; 
+    left: 20px;
+    width: 150px; 
+    padding: 10px;
+    background-color: #fff9e6; /* Fondo beige claro */
+    border: 1px solid #C49E70; 
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    text-align: center;
+}
+
+#carrito h3 {
+    margin: 0;
+    color: #a0522d;
+    padding-bottom: 5px;
+}
+
+#lista-carrito {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+#carrito p {
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+#carrito button {
+    display: block; 
+    width: 80%;
+    margin: 5px auto;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.btn-vaciar {
+    background-color: #ccc;
+    color: #333;
+}
+
+.btn-finalizar {
+    background-color: #C49E70;
+    color: white;
+}
+
+/* ===================================================================
+   ARTÍCULOS (CUADRÍCULA)
+=================================================================== */
+
+.articulos {
+    /* Cuadrícula centralizada con separación */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px 0 30px; 
+    margin-top: 20px; 
+}
+
+.articulo {
+    /* Tarjetas de producto */
+    width: 200px; 
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.2s;
+}
+
+.articulo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.articulo h3 {
+    color: #a0522d; 
+    font-size: 1.1em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.articulo p {
+    margin: 5px 0;
+    font-size: 0.95em;
+}
+
+.boton-comprar {
+    display: block; 
+    width: 90%;
+    margin: 10px auto 0;
+    background-color: #C49E70; 
+    color: white;
+    padding: 8px 0;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.boton-comprar:hover {
+    background-color: #a0805e;
+}
+
+/* ===================================================================
+   CARRUSEL (Imágenes de producto)
+=================================================================== */
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 150px; 
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.carousel img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    transition: opacity 0.5s ease-in-out;
+}
+
+.carousel img.inactive {
+    opacity: 0;
+}
+
+/* ===================================================================
+   INFO ENVÍOS Y PAGOS (Caja centralizada inferior)
+=================================================================== */
+
+.info-envios {
+    /* Caja centralizada con borde */
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fffbe6;
+    border: 1px solid #C49E70;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.info-envios h3 {
+    color: #a0522d;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.info-envios p {
+    line-height: 1.4;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+/* ===================================================================
+   FOOTER
+=================================================================== */
+
+.footer {
+    /* Estilo fijo abajo a la derecha */
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 0.8em;
+    color: #a0522d;
+    text-align: right;
+    line-height: 1.4;
+}
+
+/* ===================================================================
+   MODAL IMÁGENES
+=================================================================== */
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.9); 
+}
+
+#modal-img {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    max-height: 80%;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+.cerrar, .prev, .next {
+    position: absolute;
+    top: 15px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.cerrar {
+    right: 35px;
+}
+
+.prev {
+    left: 35px;
+}
+
+.next {
+    right: 65px;
+}
+
+.cerrar:hover, .prev:hover, .next:hover {
+    color: #bbb;
+}
+
+/* ===================================================================
+   AJUSTES PARA MÓVILES
+=================================================================== */
+
+@media (max-width: 768px) {
+    #carrito {
+        /* Mover el carrito para que no estorbe en móviles */
+        position: static;
+        width: 90%;
+        margin: 10px auto;
+        left: auto;
+        top: auto;
+    }
+
+    .boton-admin {
+        /* Ajuste de posición */
+        top: 5px;
+        right: 5px;
+    }
+
+    .articulos {
+        justify-content: space-around;
+        gap: 15px;
+    }
+
+    .articulo {
+        width: 45%;
+        max-width: 250px;
+    }
+
+    .footer {
+        position: static;
+        text-align: center;
+        padding: 10px 0;
+        border-top: 1px solid #ccc;
+    }
+}
