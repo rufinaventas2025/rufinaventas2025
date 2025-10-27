@@ -25,7 +25,7 @@
         <div class="articulo">
             <h3>Cartuchera</h3>
             <div class="carousel">
-                <img src="./static/images/cartuchera.jpg" class="">
+                <img src="./static/images/cartuchera.jpg" alt="Cartuchera Abierta" class="">
             </div>
             <p>Precio: $600.0</p>
             <p>Stock: 7</p>
@@ -35,7 +35,7 @@
         <div class="articulo">
             <h3>Mochilas</h3>
             <div class="carousel">
-                <img src="./static/images/mochilas.png" class="">
+                <img src="./static/images/mochilas.png" alt="Mochilas con diseños" class="">
             </div>
             <p>Precio: $2300.0</p>
             <p>Stock: 5</p>
@@ -45,7 +45,7 @@
         <div class="articulo">
             <h3>Cartera</h3>
             <div class="carousel">
-                <img src="./static/images/funda-para-mate.webp" class=""> 
+                <img src="./static/images/funda-para-mate.webp" alt="Funda o Cartera para Mate" class=""> 
             </div>
             <p>Precio: $1800.0</p>
             <p>Stock: 4</p>
@@ -55,9 +55,9 @@
         <div class="articulo">
             <h3>Monederos</h3>
             <div class="carousel">
-                <img src="./static/images/monedero 1.jpg" class="">
-                <img src="./static/images/monedero 2.jpg" class="inactive">
-                <img src="./static/images/monedero 3.jpg" class="inactive">
+                <img src="./static/images/monedero 1.jpg" alt="Monedero diseño 1" class="">
+                <img src="./static/images/monedero 2.jpg" alt="Monedero diseño 2" class="inactive">
+                <img src="./static/images/monedero 3.jpg" alt="Monedero diseño 3" class="inactive">
             </div>
             <p>Precio: $600.0</p>
             <p>Stock: 6</p>
@@ -67,8 +67,8 @@
         <div class="articulo">
             <h3>Porta mate</h3>
             <div class="carousel">
-                <img src="./static/images/portamate.jpg" class="">
-                <img src="./static/images/portamate2.jpg" class="inactive">
+                <img src="./static/images/portamate.jpg" alt="Porta Mate diseño 1" class="">
+                <img src="./static/images/portamate2.jpg" alt="Porta Mate diseño 2" class="inactive">
             </div>
             <p>Precio: $1300.0</p>
             <p>Stock: 5</p>
@@ -78,7 +78,7 @@
         <div class="articulo">
             <h3>Matera</h3>
             <div class="carousel">
-                <img src="./static/images/matera.jpg" class="">
+                <img src="./static/images/matera.jpg" alt="Matera diseño" class="">
             </div>
             <p>Precio: $1300.0</p>
             <p>Stock: 6</p>
@@ -154,11 +154,14 @@
         document.querySelectorAll('.carousel').forEach(carousel => {
             const imgs = carousel.querySelectorAll('img');
             let index = 0;
-            setInterval(() => {
-                imgs[index].classList.add('inactive');
-                index = (index + 1) % imgs.length;
-                imgs[index].classList.remove('inactive');
-            }, 2000);
+            // Solo iniciar si hay más de una imagen
+            if (imgs.length > 1) { 
+                setInterval(() => {
+                    imgs[index].classList.add('inactive');
+                    index = (index + 1) % imgs.length;
+                    imgs[index].classList.remove('inactive');
+                }, 2000);
+            }
         });
 
         // Modal imágenes
