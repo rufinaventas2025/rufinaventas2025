@@ -10,8 +10,6 @@
         <img src="./static/img/titulo.png" alt="Rufina Costuras Creativas">
     </header>
 
-    <button class="boton-admin" onclick="accesoAdmin()">Agregar/Eliminar Artículo</button>
-
     <div id="carrito">
         <h3>🛍️ Carrito</h3>
         <ul id="lista-carrito"></ul>
@@ -25,7 +23,7 @@
         <div class="articulo">
             <h3>Cartuchera</h3>
             <div class="carousel">
-                <img src="./static/images/Cartuchera.jpg" alt="Cartuchera Abierta" class="">
+                <img src="./static/images/cartuchera.jpg" alt="Cartuchera Abierta" class="">
             </div>
             <p>Precio: $600.0</p>
             <p class="estado-stock">Con Stock</p> 
@@ -45,7 +43,7 @@
         <div class="articulo">
             <h3>Cartera</h3>
             <div class="carousel">
-                <img src="./static/images/Cartera.jpg" alt="Carteras" class=""> 
+                <img src="./static/images/funda-para-mate.webp" alt="Funda o Cartera para Mate" class=""> 
             </div>
             <p>Precio: $1800.0</p>
             <p class="estado-stock">Con Stock</p> 
@@ -191,21 +189,7 @@
         });
     
     
-        // --- FUNCIONES DE CARRITO Y ADMINISTRADOR ---
-    
-        // Función de Acceso al Administrador (CON CONTRASEÑA JS)
-        function accesoAdmin() {
-            // Ruta absoluta corregida. Usando el nombre del repositorio ('rufinaventas2025') y la carpeta 'templates'.
-            const adminUrl = "/rufinaventas2025/templates/clave.html"; 
-            // La contraseña está definida aquí
-            const password = prompt("Ingrese la contraseña de Administrador de Ventas:");
-    
-            if (password === "Admin@2025") { // Contraseña: Admin@2025
-                window.location.href = adminUrl; 
-            } else if (password !== null) {
-                alert("Contraseña incorrecta. Acceso denegado."); 
-            }
-        }
+        // --- FUNCIONES DE CARRITO (FUNCIÓN DE ADMIN ELIMINADA) ---
     
         let carrito = [];
         function agregarAlCarrito(nombre, precio) {
