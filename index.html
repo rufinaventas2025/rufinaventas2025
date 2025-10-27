@@ -21,14 +21,14 @@
     </div>
 
     <div class="articulos">
+        
         <div class="articulo">
             <h3>Cartuchera</h3>
             <div class="carousel">
                 <img src="./static/images/cartuchera.jpg" alt="Cartuchera Abierta" class="">
             </div>
             <p>Precio: $600.0</p>
-            <p>Stock: 7</p>
-            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Cartuchera',600)">Agregar al carrito</a>
+            <p class="estado-stock">Con Stock</p> <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Cartuchera',600)">Agregar al carrito</a>
         </div>
 
         <div class="articulo">
@@ -37,8 +37,7 @@
                 <img src="./static/images/mochilas.png" alt="Mochilas con diseños" class="">
             </div>
             <p>Precio: $2300.0</p>
-            <p>Stock: 5</p>
-            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Mochilas',2300)">Agregar al carrito</a>
+            <p class="estado-stock">Con Stock</p> <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Mochilas',2300)">Agregar al carrito</a>
         </div>
 
         <div class="articulo">
@@ -47,8 +46,7 @@
                 <img src="./static/images/funda-para-mate.webp" alt="Funda o Cartera para Mate" class=""> 
             </div>
             <p>Precio: $1800.0</p>
-            <p>Stock: 4</p>
-            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Cartera',1800)">Agregar al carrito</a>
+            <p class="estado-stock">Con Stock</p> <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Cartera',1800)">Agregar al carrito</a>
         </div>
 
         <div class="articulo">
@@ -59,8 +57,7 @@
                 <img src="./static/images/monedero 3.jpg" alt="Monedero diseño 3" class="inactive">
             </div>
             <p>Precio: $600.0</p>
-            <p>Stock: 6</p>
-            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Monederos',600)">Agregar al carrito</a>
+            <p class="estado-stock">Con Stock</p> <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Monederos',600)">Agregar al carrito</a>
         </div>
 
         <div class="articulo">
@@ -70,8 +67,7 @@
                 <img src="./static/images/portamate2.jpg" alt="Porta Mate diseño 2" class="inactive">
             </div>
             <p>Precio: $1300.0</p>
-            <p>Stock: 5</p>
-            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Porta mate',1300)">Agregar al carrito</a>
+            <p class="estado-stock">Con Stock</p> <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Porta mate',1300)">Agregar al carrito</a>
         </div>
 
         <div class="articulo">
@@ -80,8 +76,7 @@
                 <img src="./static/images/matera.jpg" alt="Matera diseño" class="">
             </div>
             <p>Precio: $1300.0</p>
-            <p>Stock: 6</p>
-            <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Matera',1300)">Agregar al carrito</a>
+            <p class="estado-stock">Con Stock</p> <a href="#" class="boton-comprar" onclick="agregarAlCarrito('Matera',1300)">Agregar al carrito</a>
         </div>
 
     </div>
@@ -179,7 +174,7 @@
             mensaje += `\nTOTAL A PAGAR: $${totalCompra}`;
             mensaje += "\n\nPor favor, responde este mensaje para coordinar el pago y la entrega.";
     
-            // Enlace a WhatsApp (Usando el número de la información de tu footer: 094 363 375 -> +59894363375)
+            // Enlace a WhatsApp (Usando el número: 094 363 375 -> +59894363375)
             const whatsappLink = `https://wa.me/59894363375?text=${encodeURIComponent(mensaje)}`; 
     
             // Redirigir y simular descuento de stock
@@ -196,9 +191,10 @@
         function accesoAdmin() {
             // Ruta absoluta corregida. Usando el nombre del repositorio ('rufinaventas2025') y la carpeta 'templates'.
             const adminUrl = "/rufinaventas2025/templates/clave.html"; 
+            // La contraseña está definida aquí
             const password = prompt("Ingrese la contraseña de Administrador de Ventas:");
     
-            if (password === "Admin@2025") { 
+            if (password === "Admin@2025") { // Contraseña modificada
                 window.location.href = adminUrl; 
             } else if (password !== null) {
                 alert("Contraseña incorrecta. Acceso denegado."); 
